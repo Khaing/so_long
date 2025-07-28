@@ -1,0 +1,43 @@
+Sea-Themed Color Palette for so_long Game
+
+== WATER & OCEAN ==
+Deep Ocean Blue:    #006994
+Ocean Blue:         #4A90E2  
+Light Ocean:        #5DADE2
+Sky Blue:           #87CEEB
+Bright Blue:        #1E90FF
+
+== DOLPHIN COLORS ==
+Dolphin Body:       #4A90E2
+Dolphin Light:      #5DADE2
+Dolphin Highlight:  #87CEEB
+Eye Color:          #000000
+Eye Highlight:      #FFFFFF
+
+== FISH COLORS ==
+Fish Gold:          #FFD700
+Fish Bright:        #FFE135
+Fish Orange:        #FFA500
+Fish Dark Orange:   #FF8C00
+Fish Eye:           #000000
+Fish Eye Light:     #FFFFFF
+
+== CORAL WALLS ==
+Hot Pink:           #FF69B4
+Deep Pink:          #FF1493
+Coral Red:          #FF6347
+Orange Red:         #FF4500
+Dark Red:           #DC143C
+Orange:             #FFA500
+
+== SEAWEED EXIT ==
+Forest Green:       #228B22
+Lime Green:         #32CD32
+Spring Green:       #00FF7F
+Light Green:        #90EE90
+Pale Green:         #98FB98
+
+== BUBBLES & EFFECTS ==
+Bubble Light:       #E6F3FF
+Bubble Medium:      #CCE7FF
+Shimmer:            #FFFFFF
