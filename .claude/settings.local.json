@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Read(//private/tmp/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(chmod:*)"
     ],
     "deny": [],
     "ask": []

@@ -2,12 +2,23 @@ NAME = so_long
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -O2
-FRAMEWORKS = -framework OpenGL -framework AppKit
 
-MLX_DIR = minilibx_opengl_20191021
-MLX_LIB = $(MLX_DIR)/libmlx.a
-MLX_INC = -I $(MLX_DIR)
-MLX_LNK = -L $(MLX_DIR) -lmlx
+# Detect OS
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S), Linux)
+	MLX_DIR = minilibx-linux
+	MLX_LIB = $(MLX_DIR)/libmlx.a
+	MLX_INC = -I $(MLX_DIR)
+	MLX_LNK = -L $(MLX_DIR) -lmlx -lXext -lX11
+	FRAMEWORKS =
+else ifeq ($(UNAME_S), Darwin)
+	MLX_DIR = minilibx_opengl_20191021
+	MLX_LIB = $(MLX_DIR)/libmlx.a
+	MLX_INC = -I $(MLX_DIR)
+	MLX_LNK = -L $(MLX_DIR) -lmlx
+	FRAMEWORKS = -framework OpenGL -framework AppKit
+endif
 
 SRCDIR = src
 INCDIR = includes
