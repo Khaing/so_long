@@ -27,11 +27,13 @@ SRC = $(SRCDIR)/main.c \
       $(SRCDIR)/map_parser.c \
       $(SRCDIR)/map_validator.c \
       $(SRCDIR)/game_init.c \
-      $(SRCDIR)/game_render.c \
+      $(SRCDIR)/game_render_norm.c \
       $(SRCDIR)/game_input.c \
       $(SRCDIR)/game_logic.c \
-      $(SRCDIR)/sprite_loader.c \
-      $(SRCDIR)/sprite_loader_simple.c \
+      $(SRCDIR)/sprite_loader_norm.c \
+      $(SRCDIR)/sprite_beautiful.c \
+      $(SRCDIR)/sprite_utils.c \
+      $(SRCDIR)/string_utils.c \
       $(SRCDIR)/animation.c \
       $(SRCDIR)/error_handler.c \
       $(SRCDIR)/cleanup.c

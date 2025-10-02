@@ -22,17 +22,52 @@ static int	is_wall_enclosed(t_map *map)
 	return (1);
 }
 
-static void	flood_fill(char **grid, int x, int y, int width, int height)
+typedef struct s_point
 {
-	if (x < 0 || x >= width || y < 0 || y >= height || 
-		grid[y][x] == MAP_WALL || grid[y][x] == 'V')
-		return;
-	
-	grid[y][x] = 'V';
-	flood_fill(grid, x + 1, y, width, height);
-	flood_fill(grid, x - 1, y, width, height);
-	flood_fill(grid, x, y + 1, width, height);
-	flood_fill(grid, x, y - 1, width, height);
+	int	x;
+	int	y;
+}	t_point;
+
+static void	add_if_valid(t_point *s, int *t, t_point p)
+{
+	if (p.x < 0 || p.y < 0)
+		return ;
+	if (*t >= 9999)
+		return ;
+	s[*t].x = p.x;
+	s[*t].y = p.y;
+	(*t)++;
+}
+
+static void	flood_fill(char **grid, int sx, int sy, int w, int h)
+{
+	t_point	stack[10000];
+	t_point	cur;
+	t_point	next;
+	int		top;
+
+	top = 0;
+	stack[top++].x = sx;
+	stack[top - 1].y = sy;
+	while (top > 0)
+	{
+		cur = stack[--top];
+		if (cur.x < 0 || cur.x >= w || cur.y < 0 || cur.y >= h)
+			continue ;
+		if (grid[cur.y][cur.x] == MAP_WALL || grid[cur.y][cur.x] == 'V')
+			continue ;
+		grid[cur.y][cur.x] = 'V';
+		next.x = cur.x + 1;
+		next.y = cur.y;
+		add_if_valid(stack, &top, next);
+		next.x = cur.x - 1;
+		add_if_valid(stack, &top, next);
+		next.y = cur.y + 1;
+		next.x = cur.x;
+		add_if_valid(stack, &top, next);
+		next.y = cur.y - 1;
+		add_if_valid(stack, &top, next);
+	}
 }
 
 static char	**copy_map(t_map *map)

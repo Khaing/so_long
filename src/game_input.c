@@ -23,14 +23,18 @@ void	move_player(t_game *game, int new_x, int new_y)
 	game->map.player.x = new_x;
 	game->map.player.y = new_y;
 	game->moves++;
-	
-	printf("Moves: %d\n", game->moves);
-	
+	ft_putstr("Moves: ");
+	ft_putnbr(game->moves);
+	ft_putstr("\n");
 	if (game->map.grid[new_y][new_x] == MAP_COLLECTIBLE)
 	{
 		game->map.grid[new_y][new_x] = MAP_EMPTY;
 		game->map.collected++;
-		printf("Collected: %d/%d\n", game->map.collected, game->map.collectibles);
+		ft_putstr("Collected: ");
+		ft_putnbr(game->map.collected);
+		ft_putstr("/");
+		ft_putnbr(game->map.collectibles);
+		ft_putstr("\n");
 	}
 	
 	check_win_condition(game);

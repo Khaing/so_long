@@ -107,7 +107,12 @@ int		parse_map(t_game *game, char *filename);
 int		validate_map(t_map *map);
 int		init_game(t_game *game, char *map_file);
 int		load_sprites(t_game *game);
-int		load_sprites_simple(t_game *game);
+void	*create_colored_square(void *mlx, int size, int color);
+void	*create_dolphin(void *mlx, int size);
+void	*create_fish(void *mlx, int size);
+void	*create_exit_gate(void *mlx, int size);
+void	*create_coral(void *mlx, int size);
+void	*create_ocean(void *mlx, int size);
 void	render_game(t_game *game);
 int		handle_keypress(int keycode, t_game *game);
 int		handle_close(t_game *game);
@@ -121,5 +126,8 @@ char	*get_next_line(int fd);
 int		is_valid_path(t_map *map);
 void	update_camera(t_game *game);
 int		animation_loop(t_game *game);
+void	ft_putstr(char *str);
+void	ft_putnbr(int n);
+char	*ft_itoa(int n);
 
 #endif
