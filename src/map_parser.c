@@ -8,12 +8,12 @@ char	*get_next_line(int fd)
 	int		i;
 	int		ret;
 
-	buffer = malloc(1000);
+	buffer = malloc(10000);
 	if (!buffer)
 		return (NULL);
 	i = 0;
 	ret = read(fd, &c, 1);
-	while (ret && c != '\n')
+	while (ret && c != '\n' && i < 9999)
 	{
 		if (c != '\r')
 			buffer[i++] = c;
@@ -71,11 +71,13 @@ static int	parse_map_line(t_map *map, char *line, int y)
 {
 	int	x;
 
+	if (!line || strlen(line) == 0)
+		return (0);
 	if (map->width == 0)
 		map->width = strlen(line);
 	else if ((int)strlen(line) != map->width)
 		return (0);
-	
+
 	x = 0;
 	while (line[x])
 	{
@@ -110,7 +112,7 @@ int	parse_map(t_game *game, char *filename)
 
 	init_map_data(&game->map);
 	game->map.height = count_lines(filename);
-	if (game->map.height <= 0)
+	if (game->map.height <= 0 || game->map.height < 3)
 		return (0);
 	
 	game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
