@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/07 12:10:23 by kmar              #+#    #+#             */
+/*   Updated: 2025/10/07 12:10:50 by kmar             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
 void	free_map(char **map)
@@ -5,8 +17,7 @@ void	free_map(char **map)
 	int	i;
 
 	if (!map)
-		return;
-	
+		return ;
 	i = 0;
 	while (map[i])
 	{
@@ -26,7 +37,6 @@ static void	destroy_sprites(t_game *game)
 		mlx_destroy_image(game->mlx, game->sprites.empty);
 	if (game->sprites.exit)
 		mlx_destroy_image(game->mlx, game->sprites.exit);
-	
 	i = 0;
 	while (i < 4)
 	{
@@ -41,13 +51,10 @@ static void	destroy_sprites(t_game *game)
 void	cleanup_game(t_game *game)
 {
 	if (!game)
-		return;
-	
+		return ;
 	destroy_sprites(game);
-	
 	if (game->window && game->mlx)
 		mlx_destroy_window(game->mlx, game->window);
-	
 	if (game->map.grid)
 		free_map(game->map.grid);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_validator.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/07 12:20:25 by kmar              #+#    #+#             */
+/*   Updated: 2025/10/07 12:27:19 by kmar             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
 static int	is_wall_enclosed(t_map *map)
@@ -11,9 +23,9 @@ static int	is_wall_enclosed(t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
-			if ((y == 0 || y == map->height - 1 || 
-				 x == 0 || x == map->width - 1) && 
-				map->grid[y][x] != MAP_WALL)
+			if ((y == 0 || y == map->height - 1
+					|| x == 0 || x == map->width - 1)
+				&& map->grid[y][x] != MAP_WALL)
 				return (0);
 			x++;
 		}
@@ -21,12 +33,6 @@ static int	is_wall_enclosed(t_map *map)
 	}
 	return (1);
 }
-
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
 
 static void	add_if_valid(t_point *s, int *t, t_point p)
 {
@@ -78,7 +84,6 @@ static char	**copy_map(t_map *map)
 	copy = malloc(sizeof(char *) * (map->height + 1));
 	if (!copy)
 		return (NULL);
-	
 	y = 0;
 	while (y < map->height)
 	{
@@ -108,9 +113,8 @@ int	is_valid_path(t_map *map)
 	grid_copy = copy_map(map);
 	if (!grid_copy)
 		return (0);
-	
-	flood_fill(grid_copy, map->player.x, map->player.y, map->width, map->height);
-	
+	flood_fill(grid_copy, map->player.x, map->player.y,
+		map->width, map->height);
 	collectibles_found = 0;
 	exit_found = 0;
 	y = 0;
@@ -130,7 +134,6 @@ int	is_valid_path(t_map *map)
 		}
 		y++;
 	}
-	
 	free_map(grid_copy);
 	return (collectibles_found == map->collectibles && exit_found);
 }
@@ -139,15 +142,11 @@ int	validate_map(t_map *map)
 {
 	if (!map || !map->grid)
 		return (0);
-	
 	if (map->width < 3 || map->height < 3)
 		return (0);
-	
 	if (!is_wall_enclosed(map))
 		return (0);
-	
 	if (!is_valid_path(map))
 		return (0);
-	
 	return (1);
 }

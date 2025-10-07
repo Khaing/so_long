@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite_beautiful.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/07 12:27:34 by kmar              #+#    #+#             */
+/*   Updated: 2025/10/07 12:29:27 by kmar             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
 static void	put_pix(char *d, int x, int y, int p[3])
@@ -60,9 +72,9 @@ void	*create_ocean(void *mlx, int size)
 static void	draw_dolphin_body(char *d, int p[3])
 {
 	p[2] = 0x6495ED;
-	draw_ellipse(d, (int[4]){35, 32, 20, 11}, p);
+	draw_ellipse(d, (int [4]){35, 32, 20, 11}, p);
 	p[2] = 0xE0F6FF;
-	draw_ellipse(d, (int[4]){33, 36, 15, 8}, p);
+	draw_ellipse(d, (int [4]){33, 36, 15, 8}, p);
 }
 
 static void	draw_dolphin_fins(char *d, int p[3])
@@ -75,7 +87,7 @@ static void	draw_dolphin_fins(char *d, int p[3])
 	{
 		j = 18;
 		while (j < 24 - (i - 35) * (i - 35) / 8)
-			put_pix(d, i, j++, (int[3]){p[0], p[1], 0x4682B4});
+			put_pix(d, i, j++, (int [3]){p[0], p[1], 0x4682B4});
 		i++;
 	}
 	i = 52;
@@ -83,7 +95,7 @@ static void	draw_dolphin_fins(char *d, int p[3])
 	{
 		j = 26 + (i - 56) * (i - 56) / 4;
 		while (j < 38 - (i - 56) * (i - 56) / 4)
-			put_pix(d, i, j++, (int[3]){p[0], p[1], 0x4169E1});
+			put_pix(d, i, j++, (int [3]){p[0], p[1], 0x4169E1});
 		i++;
 	}
 }
@@ -103,7 +115,7 @@ void	*create_dolphin(void *mlx, int size)
 	if (!data)
 		return (mlx_destroy_image(mlx, img), NULL);
 	p[2] = 0x001A33;
-	draw_ellipse(data, (int[4]){32, 32, 32, 32}, p);
+	draw_ellipse(data, (int [4]){32, 32, 32, 32}, p);
 	draw_dolphin_body(data, p);
 	draw_dolphin_fins(data, p);
 	i = 24;
@@ -111,7 +123,7 @@ void	*create_dolphin(void *mlx, int size)
 	{
 		j = 28;
 		while (j < 32)
-			put_pix(data, i++, j++, (int[3]){p[0], p[1], 0x000000});
+			put_pix(data, i++, j++, (int [3]){p[0], p[1], 0x000000});
 		i++;
 	}
 	return (img);
@@ -127,7 +139,7 @@ static void	draw_fish_stripes(char *d, int p[3])
 	{
 		j = 25;
 		while (j < 39)
-			put_pix(d, i, j++, (int[3]){p[0], p[1], 0xFFFFFF});
+			put_pix(d, i, j++, (int [3]){p[0], p[1], 0xFFFFFF});
 		i++;
 	}
 	i = 34;
@@ -135,7 +147,7 @@ static void	draw_fish_stripes(char *d, int p[3])
 	{
 		j = 25;
 		while (j < 39)
-			put_pix(d, i, j++, (int[3]){p[0], p[1], 0xFFFFFF});
+			put_pix(d, i, j++, (int [3]){p[0], p[1], 0xFFFFFF});
 		i++;
 	}
 }
@@ -155,16 +167,16 @@ void	*create_fish(void *mlx, int size)
 	if (!data)
 		return (mlx_destroy_image(mlx, img), NULL);
 	p[2] = 0x001A33;
-	draw_ellipse(data, (int[4]){32, 32, 32, 32}, p);
+	draw_ellipse(data, (int [4]){32, 32, 32, 32}, p);
 	p[2] = 0xFF8C00;
-	draw_ellipse(data, (int[4]){30, 32, 13, 10}, p);
+	draw_ellipse(data, (int [4]){30, 32, 13, 10}, p);
 	draw_fish_stripes(data, p);
 	i = 43;
 	while (i < 52)
 	{
 		j = 27 + (i - 47) * (i - 47) / 5;
 		while (j < 37 - (i - 47) * (i - 47) / 5)
-			put_pix(data, i, j++, (int[3]){p[0], p[1], 0xFFAA33});
+			put_pix(data, i, j++, (int [3]){p[0], p[1], 0xFFAA33});
 		i++;
 	}
 	return (img);

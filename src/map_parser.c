@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/07 12:18:29 by kmar              #+#    #+#             */
+/*   Updated: 2025/10/07 12:19:56 by kmar             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
 char	*get_next_line(int fd)
@@ -77,7 +89,6 @@ static int	parse_map_line(t_map *map, char *line, int y)
 		map->width = strlen(line);
 	else if ((int)strlen(line) != map->width)
 		return (0);
-
 	x = 0;
 	while (line[x])
 	{
@@ -114,11 +125,9 @@ int	parse_map(t_game *game, char *filename)
 	game->map.height = count_lines(filename);
 	if (game->map.height <= 0 || game->map.height < 3)
 		return (0);
-	
 	game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
 	if (!game->map.grid)
 		return (0);
-	
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
@@ -126,7 +135,6 @@ int	parse_map(t_game *game, char *filename)
 		game->map.grid = NULL;
 		return (0);
 	}
-	
 	y = 0;
 	while (y < game->map.height && (line = get_next_line(fd)) != NULL)
 	{
@@ -144,7 +152,6 @@ int	parse_map(t_game *game, char *filename)
 		y++;
 	}
 	close(fd);
-	
 	if (y != game->map.height)
 	{
 		while (--y >= 0)
@@ -153,16 +160,13 @@ int	parse_map(t_game *game, char *filename)
 		game->map.grid = NULL;
 		return (0);
 	}
-	
 	game->map.grid[y] = NULL;
-	
-	if (game->map.player.x == -1 || game->map.exit.x == -1 || 
-		game->map.collectibles == 0)
+	if (game->map.player.x == -1 || game->map.exit.x == -1
+		|| game->map.collectibles == 0)
 	{
 		free_map(game->map.grid);
 		game->map.grid = NULL;
 		return (0);
 	}
-	
 	return (1);
 }
