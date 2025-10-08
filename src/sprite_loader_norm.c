@@ -19,7 +19,8 @@ static int	load_collectibles(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		game->sprites.collectible[i] = create_fish(game->mlx, TILE_SIZE);
+		game->sprites.collectible[i] = create_fish_anim(game->mlx,
+				TILE_SIZE, i);
 		if (!game->sprites.collectible[i])
 			return (0);
 		i++;
@@ -34,7 +35,8 @@ static int	load_player_sprites(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		game->sprites.player[i] = create_dolphin(game->mlx, TILE_SIZE);
+		game->sprites.player[i] = create_dolphin_anim(game->mlx,
+				TILE_SIZE, i);
 		if (!game->sprites.player[i])
 			return (0);
 		i++;

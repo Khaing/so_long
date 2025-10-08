@@ -131,6 +131,8 @@ void	*create_fish(void *mlx, int size);
 void	*create_exit_gate(void *mlx, int size);
 void	*create_coral(void *mlx, int size);
 void	*create_ocean(void *mlx, int size);
+void	*create_dolphin_anim(void *mlx, int size, int frame);
+void	*create_fish_anim(void *mlx, int size, int frame);
 void	render_game(t_game *game);
 int		handle_keypress(int keycode, t_game *game);
 int		handle_close(t_game *game);

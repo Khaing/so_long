@@ -14,10 +14,10 @@
 
 void	print_error(char *message)
 {
-	write(STDERR_FILENO, ERROR_MSG, strlen(ERROR_MSG));
+	write(STDOUT_FILENO, ERROR_MSG, strlen(ERROR_MSG));
 	if (message)
 	{
-		write(STDERR_FILENO, message, strlen(message));
-		write(STDERR_FILENO, "\n", 1);
+		write(STDOUT_FILENO, message, strlen(message));
+		write(STDOUT_FILENO, "\n", 1);
 	}
 }

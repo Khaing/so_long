@@ -67,12 +67,6 @@ static int	setup_hooks(t_game *game)
 int	init_game(t_game *game, char *map_file)
 {
 	init_game_data(game);
-	game->mlx = mlx_init();
-	if (!game->mlx)
-	{
-		print_error("Failed to initialize MLX");
-		return (0);
-	}
 	if (!parse_map(game, map_file))
 	{
 		print_error("Invalid map file");
@@ -82,6 +76,13 @@ int	init_game(t_game *game, char *map_file)
 	if (!validate_map(&game->map))
 	{
 		print_error("Map validation failed");
+		cleanup_game(game);
+		return (0);
+	}
+	game->mlx = mlx_init();
+	if (!game->mlx)
+	{
+		print_error("Failed to initialize MLX");
 		cleanup_game(game);
 		return (0);
 	}

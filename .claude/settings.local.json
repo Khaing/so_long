@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(killall:*)",
+      "Bash(done)",
+      "Bash(fi)",
+      "Bash(tee:*)",
+      "Read(//private/tmp/**)",
+      "Bash(bash)",
+      "Bash(leaks:*)",
+      "Bash(/dev/null)",
+      "Bash(printf:*)",
+      "Bash(./so_long:*)",
+      "Bash(./so_long maps_err/no_player.ber)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

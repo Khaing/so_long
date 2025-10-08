@@ -32,6 +32,7 @@ SRC = $(SRCDIR)/main.c \
       $(SRCDIR)/game_logic.c \
       $(SRCDIR)/sprite_loader_norm.c \
       $(SRCDIR)/sprite_beautiful.c \
+      $(SRCDIR)/sprite_animated.c \
       $(SRCDIR)/sprite_utils.c \
       $(SRCDIR)/string_utils.c \
       $(SRCDIR)/animation.c \
