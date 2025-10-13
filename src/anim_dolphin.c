@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_animated.c                                  :+:      :+:    :+:   */
+/*   anim_dolphin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 21:00:00 by kmar              #+#    #+#             */
-/*   Updated: 2025/10/07 21:30:00 by kmar             ###   ########.fr       */
+/*   Created: 2025/10/08 00:00:00 by kmar              #+#    #+#             */
+/*   Updated: 2025/10/08 00:00:00 by kmar             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,26 @@ static void	draw_dolphin_frame(char *d, int p[3], int frame)
 	}
 }
 
+static void	draw_dolphin_eye(char *data, int p[3], int frame)
+{
+	int	i;
+	int	j;
+
+	i = 24 + (frame / 2);
+	while (i < 28 + (frame / 2))
+	{
+		j = 28;
+		while (j < 32)
+			put_pix(data, i++, j++, (int [3]){p[0], p[1], 0x000000});
+		i++;
+	}
+}
+
 void	*create_dolphin_anim(void *mlx, int size, int frame)
 {
 	void	*img;
 	char	*data;
 	int		p[3];
-	int		i;
-	int		j;
 
 	img = mlx_new_image(mlx, size, size);
 	if (!img)
@@ -86,68 +99,6 @@ void	*create_dolphin_anim(void *mlx, int size, int frame)
 	p[2] = 0x001A33;
 	draw_ellipse(data, (int [4]){32, 32, 32, 32}, p);
 	draw_dolphin_frame(data, p, frame);
-	i = 24 + (frame / 2);
-	while (i < 28 + (frame / 2))
-	{
-		j = 28;
-		while (j < 32)
-			put_pix(data, i++, j++, (int [3]){p[0], p[1], 0x000000});
-		i++;
-	}
-	return (img);
-}
-
-static void	draw_fish_frame(char *d, int p[3], int frame)
-{
-	int	i;
-	int	j;
-	int	offset;
-
-	offset = (frame % 2) * 2 - 1;
-	p[2] = 0xFF8C00;
-	draw_ellipse(d, (int [4]){30, 32, 13, 10 + frame / 2}, p);
-	i = 26 + offset;
-	while (i < 30 + offset)
-	{
-		j = 25;
-		while (j < 39)
-			put_pix(d, i, j++, (int [3]){p[0], p[1], 0xFFFFFF});
-		i++;
-	}
-	i = 34 + offset;
-	while (i < 38 + offset)
-	{
-		j = 25;
-		while (j < 39)
-			put_pix(d, i, j++, (int [3]){p[0], p[1], 0xFFFFFF});
-		i++;
-	}
-}
-
-void	*create_fish_anim(void *mlx, int size, int frame)
-{
-	void	*img;
-	char	*data;
-	int		p[3];
-	int		i;
-	int		j;
-
-	img = mlx_new_image(mlx, size, size);
-	if (!img)
-		return (NULL);
-	data = mlx_get_data_addr(img, &p[0], &p[1], &p[2]);
-	if (!data)
-		return (mlx_destroy_image(mlx, img), NULL);
-	p[2] = 0x001A33;
-	draw_ellipse(data, (int [4]){32, 32, 32, 32}, p);
-	draw_fish_frame(data, p, frame);
-	i = 43 - frame;
-	while (i < 52 - frame)
-	{
-		j = 27 + (i - 47 + frame) * (i - 47 + frame) / 5;
-		while (j < 37 - (i - 47 + frame) * (i - 47 + frame) / 5)
-			put_pix(data, i, j++, (int [3]){p[0], p[1], 0xFFAA33});
-		i++;
-	}
+	draw_dolphin_eye(data, p, frame);
 	return (img);
 }

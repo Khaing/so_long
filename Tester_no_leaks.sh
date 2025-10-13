@@ -27,7 +27,7 @@ local EXPECTED_OUTPUT="$2"
 
 # leaks --atExit -- ./so_long "$map_file" > /dev/null 2>&1
 LEAKS=$?
-if [ $LEAKS -eq 1 ]; then
+if [ "$LEAKS" -eq 1 ]; then
         printf "${RED}$C.[MKO] LEAKS ${DEF_COLOR}"
 else
         printf "${GREEN}$C.[MOK]${DEF_COLOR}";
@@ -40,7 +40,7 @@ SO_LONG_EXIT_CODE=$?
 LINE=$(head -n 1 test_check.txt)
 LINE2=$(sed -n '2p' test_check.txt)
 
-if [ $SO_LONG_EXIT_CODE == 139 ];then
+if [ "$SO_LONG_EXIT_CODE" == 139 ];then
         printf "${RED}[KO] SEGFAULT${DEF_COLOR}\n";
         ((C++))
         rm -rf test_check.txt
@@ -48,7 +48,7 @@ if [ $SO_LONG_EXIT_CODE == 139 ];then
 fi
 
 
-if [ $LINE == "Error" ];then
+if [ "$LINE" == "Error" ];then
         printf "${GREEN}[OK] ${DEF_COLOR}";
         if [ -n "$LINE2" ];then
                 if [ "${#LINE2}" -gt 1 ]; then
@@ -90,7 +90,7 @@ ps $PID > /dev/null
 
 CHECK_ERROR=$?
 
-if [ $CHECK_ERROR == 0 ]; then
+if [ "$CHECK_ERROR" == 0 ]; then
     kill $PID > /dev/null 2>&1
     printf "${GREEN}$C.[OK] ${DEF_COLOR}\n";
     
@@ -127,7 +127,7 @@ fi
 
 # leaks --atExit -- ./so_long > /dev/null 2>&1
 LEAKS=$?
-if [ $LEAKS -eq 1 ]; then
+if [ "$LEAKS" -eq 1 ]; then
         printf "${RED}$C.[MKO] LEAKS ${DEF_COLOR}"
 else
         printf "${GREEN}$C.[MOK]${DEF_COLOR}";
@@ -138,7 +138,7 @@ fi
 LINE=$(head -n 1 test_check.txt)
 LINE2=$(sed -n '2p' test_check.txt)
 
-if [ $LINE == "Error" ];then
+if [ "$LINE" == "Error" ];then
         printf "${GREEN}[OK] ${DEF_COLOR}";
         if [ -n "$LINE2" ];then
                 if [ "${#LINE2}" -gt 1 ]; then
@@ -162,7 +162,7 @@ rm -rf test_check.txt
 
 # leaks --atExit -- ./so_long invent.ber more argv > /dev/null 2>&1
 LEAKS=$?
-if [ $LEAKS -eq 1 ]; then
+if [ "$LEAKS" -eq 1 ]; then
         printf "${RED}$C.[MKO] LEAKS ${DEF_COLOR}"
 else
         printf "${GREEN}$C.[MOK]${DEF_COLOR}";
@@ -173,7 +173,7 @@ fi
 LINE=$(head -n 1 test_check.txt)
 LINE2=$(sed -n '2p' test_check.txt)
 
-if [ $LINE == "Error" ];then
+if [ "$LINE" == "Error" ];then
         printf "${GREEN}[OK] ${DEF_COLOR}";
         if [ -n "$LINE2" ];then
                 if [ "${#LINE2}" -gt 1 ]; then

@@ -1,17 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(killall:*)",
-      "Bash(done)",
-      "Bash(fi)",
-      "Bash(tee:*)",
-      "Read(//private/tmp/**)",
-      "Bash(bash)",
-      "Bash(leaks:*)",
-      "Bash(/dev/null)",
-      "Bash(printf:*)",
+      "Bash(chmod:*)",
+      "Bash(make:*)",
+      "Bash(./Tester_no_leaks.sh:*)",
+      "Bash(./so_long)",
+      "Bash(timeout:*)",
       "Bash(./so_long:*)",
-      "Bash(./so_long maps_err/no_player.ber)"
+      "Bash(cat:*)",
+      "Bash(./test_error_maps.sh:*)",
+      "Bash(awk:*)",
+      "Bash(pkill:*)"
     ],
     "deny": [],
     "ask": []

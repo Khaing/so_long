@@ -14,14 +14,23 @@
 
 static int	check_file_extension(char *filename)
 {
-	int	len;
+	int		len;
+	char	*last_slash;
+	char	*basename;
 
 	if (!filename)
 		return (0);
 	len = strlen(filename);
-	if (len < 4)
+	if (len < 5)
 		return (0);
 	if (strcmp(filename + len - 4, ".ber") != 0)
+		return (0);
+	last_slash = strrchr(filename, '/');
+	if (last_slash)
+		basename = last_slash + 1;
+	else
+		basename = filename;
+	if (basename[0] == '.')
 		return (0);
 	return (1);
 }

@@ -1,46 +1,51 @@
 Complete Explanation of the so_long Game
-I'll explain this 2D game project from a teaching perspective, covering both the big picture and the detailed algorithms.
+
 Part 1: Overview - Code Logic from Start to End
-What is so_long?
-so_long is a simple 2D game where:
-A player (dolphin) collects items (fish) on a map
-After collecting all items, the player can exit
-The player moves using WASD or arrow keys
-The game is built using MiniLibX (a simple graphics library)
-High-Level Flow
+
 Program Start → Validate Input → Parse Map → Validate Map → Initialize Graphics → Game Loop → Exit
-Let me walk you through what happens when you run ./so_long map.ber:
+
+./so_long map.ber:
+
 Step 1: Program Entry (main.c:29-48)
+
 int main(int argc, char **argv)
 Check arguments: Must have exactly 2 arguments (program name + map file)
 Check file extension: Map file must end with .ber
 Initialize game: Call init_game() to set everything up
 Start game: If successful, render the game and start the event loop
 Think of it like: Opening a board game box - you first check you have all the pieces (arguments), verify the rulebook (file extension), then set up the board (initialize), and finally start playing (game loop).
+
 Step 2: Game Initialization (game_init.c:67-108)
 This is the setup phase, executed in this specific order (order matters!):
 int init_game(t_game *game, char *map_file)
+
 2a. Initialize Data Structures
 Set all pointers to NULL
 Zero out counters (moves, game_won, etc.)
 Clear sprite array slots
+
 2b. Parse the Map (NO graphics yet!)
 Read the .ber file
 Convert it into a 2D array (grid)
 Count collectibles, find player/exit positions
+
 2c. Validate the Map (Still NO graphics!)
 Check if rectangular
 Check if surrounded by walls
 Check if all items are reachable using flood-fill algorithm
+
 2d. Initialize MLX (Graphics starts here)
 Only AFTER validation passes
 This prevents memory leaks when maps are invalid
+
 2e. Create Window
 Calculate window size based on map dimensions
 Cap at maximum window size (1024x768)
+
 2f. Load Sprites
 Create colorful images for walls, floors, player, collectibles, exit
 Store them in the game structure
+
 2g. Setup Event Hooks
 Register keyboard handler
 Register window close handler

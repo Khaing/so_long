@@ -38,24 +38,6 @@ static void	init_game_data(t_game *game)
 	game->map.grid = NULL;
 }
 
-static int	create_window(t_game *game)
-{
-	int	window_width;
-	int	window_height;
-
-	window_width = game->map.width * TILE_SIZE;
-	window_height = game->map.height * TILE_SIZE;
-	if (window_width > WINDOW_WIDTH)
-		window_width = WINDOW_WIDTH;
-	if (window_height > WINDOW_HEIGHT)
-		window_height = WINDOW_HEIGHT;
-	game->window = mlx_new_window(game->mlx, window_width, window_height,
-			"so_long");
-	if (!game->window)
-		return (0);
-	return (1);
-}
-
 static int	setup_hooks(t_game *game)
 {
 	mlx_hook(game->window, 2, 1L << 0, handle_keypress, game);
@@ -64,9 +46,8 @@ static int	setup_hooks(t_game *game)
 	return (1);
 }
 
-int	init_game(t_game *game, char *map_file)
+static int	init_map_and_validate(t_game *game, char *map_file)
 {
-	init_game_data(game);
 	if (!parse_map(game, map_file))
 	{
 		print_error("Invalid map file");
@@ -79,6 +60,11 @@ int	init_game(t_game *game, char *map_file)
 		cleanup_game(game);
 		return (0);
 	}
+	return (1);
+}
+
+static int	init_mlx_and_window(t_game *game)
+{
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
@@ -92,6 +78,16 @@ int	init_game(t_game *game, char *map_file)
 		cleanup_game(game);
 		return (0);
 	}
+	return (1);
+}
+
+int	init_game(t_game *game, char *map_file)
+{
+	init_game_data(game);
+	if (!init_map_and_validate(game, map_file))
+		return (0);
+	if (!init_mlx_and_window(game))
+		return (0);
 	if (!load_sprites(game))
 	{
 		print_error("Failed to load sprites");
