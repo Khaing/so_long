@@ -23,6 +23,7 @@ endif
 SRCDIR = src
 INCDIR = includes
 
+# Mandatory part - No enemies
 SRC = $(SRCDIR)/main.c \
       $(SRCDIR)/map_parser.c \
       $(SRCDIR)/map_parse_utils.c \
@@ -46,9 +47,38 @@ SRC = $(SRCDIR)/main.c \
       $(SRCDIR)/render_win.c \
       $(SRCDIR)/render_tile.c
 
+# Bonus part - With enemies
+SRC_BONUS = $(SRCDIR)/main.c \
+            $(SRCDIR)/map_parser.c \
+            $(SRCDIR)/map_parse_utils_bonus.c \
+            $(SRCDIR)/map_validator.c \
+            $(SRCDIR)/game_init_bonus.c \
+            $(SRCDIR)/game_window.c \
+            $(SRCDIR)/game_render_bonus.c \
+            $(SRCDIR)/game_input_bonus.c \
+            $(SRCDIR)/game_logic.c \
+            $(SRCDIR)/sprite_loader_bonus.c \
+            $(SRCDIR)/sprite_ocean.c \
+            $(SRCDIR)/sprite_exit.c \
+            $(SRCDIR)/sprite_enemy_bonus.c \
+            $(SRCDIR)/anim_dolphin.c \
+            $(SRCDIR)/anim_fish.c \
+            $(SRCDIR)/enemy_init_bonus.c \
+            $(SRCDIR)/enemy_logic_bonus.c \
+            $(SRCDIR)/string_utils.c \
+            $(SRCDIR)/animation_bonus.c \
+            $(SRCDIR)/error_handler.c \
+            $(SRCDIR)/cleanup_bonus.c \
+            $(SRCDIR)/file_utils.c \
+            $(SRCDIR)/path_utils.c \
+            $(SRCDIR)/render_win_bonus.c \
+            $(SRCDIR)/render_tile_bonus.c
+
 OBJ = $(SRC:.c=.o)
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 INC = -I $(INCDIR) $(MLX_INC)
+INC_BONUS = -I $(INCDIR) $(MLX_INC)
 
 all: $(MLX_LIB) $(NAME)
 
@@ -58,17 +88,23 @@ $(MLX_LIB):
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(MLX_LNK) $(FRAMEWORKS) -lm -o $(NAME)
 
+bonus: $(MLX_LIB) $(OBJ_BONUS)
+	$(CC) $(OBJ_BONUS) $(MLX_LNK) $(FRAMEWORKS) -lm -o $(NAME)
+
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
+%_bonus.o: %_bonus.c
+	$(CC) $(CFLAGS) $(INC_BONUS) -c $< -o $@
+
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJ_BONUS)
 	@make -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(MLX_LIB)
+	@make -C $(MLX_DIR) clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

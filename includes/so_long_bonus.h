@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -61,9 +61,11 @@
 # define MAP_COLLECTIBLE 'C'
 # define MAP_EXIT 'E'
 # define MAP_PLAYER 'P'
+# define MAP_ENEMY 'N'
 
 # define ERROR_MSG "Error\n"
 # define WIN_MSG "Congratulations! You won!\n"
+# define LOSE_MSG "Game Over! You touched an enemy!\n"
 
 typedef struct s_point
 {
@@ -76,6 +78,15 @@ typedef struct s_position
 	int	x;
 	int	y;
 }	t_position;
+
+typedef struct s_enemy
+{
+	t_position	pos;
+	int			direction;
+	int			patrol_start;
+	int			patrol_end;
+	int			axis;
+}	t_enemy;
 
 typedef struct s_map
 {
@@ -95,6 +106,7 @@ typedef struct s_sprites
 	void	*collectible[4];
 	void	*exit;
 	void	*player[4];
+	void	*enemy[2];
 	int		width;
 	int		height;
 	int		current_frame;
@@ -116,6 +128,8 @@ typedef struct s_game
 	t_map		map;
 	t_sprites	sprites;
 	t_camera	camera;
+	t_enemy		*enemies;
+	int			enemy_count;
 	int			moves;
 	int			game_won;
 	int			game_over;
@@ -131,7 +145,12 @@ void	*create_coral(void *mlx, int size);
 void	*create_ocean(void *mlx, int size);
 void	*create_dolphin_anim(void *mlx, int size, int frame);
 void	*create_fish_anim(void *mlx, int size, int frame);
+void	*create_enemy_sprite(void *mlx, int size, int frame);
 void	render_game(t_game *game);
+void	render_lose_screen(t_game *game);
+void	update_enemies(t_game *game);
+void	check_enemy_collision(t_game *game);
+int		init_enemies(t_game *game);
 void	render_win_screen(t_game *game);
 void	render_tile(t_game *game, int map_x, int map_y);
 void	render_visible_tiles(t_game *game);

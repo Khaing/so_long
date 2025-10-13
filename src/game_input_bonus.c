@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_input.c                                       :+:      :+:    :+:   */
+/*   game_input_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 static int	is_valid_move(t_game *game, int new_x, int new_y)
 {
@@ -44,7 +44,11 @@ void	move_player(t_game *game, int new_x, int new_y)
 		ft_putnbr(game->map.collectibles);
 		ft_putstr("\n");
 	}
-	check_win_condition(game);
+	check_enemy_collision(game);
+	if (game->game_over)
+		ft_putstr(LOSE_MSG);
+	else
+		check_win_condition(game);
 	render_game(game);
 }
 

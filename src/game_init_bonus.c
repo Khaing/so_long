@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_init.c                                        :+:      :+:    :+:   */
+/*   game_init_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 static void	init_game_data(t_game *game)
 {
@@ -26,6 +26,8 @@ static void	init_game_data(t_game *game)
 	game->camera.y = 0;
 	game->camera.offset_x = 0;
 	game->camera.offset_y = 0;
+	game->enemies = NULL;
+	game->enemy_count = 0;
 	game->sprites.wall = NULL;
 	game->sprites.empty = NULL;
 	game->sprites.exit = NULL;
@@ -36,6 +38,8 @@ static void	init_game_data(t_game *game)
 		game->sprites.player[i] = NULL;
 		i++;
 	}
+	game->sprites.enemy[0] = NULL;
+	game->sprites.enemy[1] = NULL;
 	game->map.grid = NULL;
 }
 
@@ -89,6 +93,12 @@ int	init_game(t_game *game, char *map_file)
 		return (0);
 	if (!init_mlx_and_window(game))
 		return (0);
+	if (!init_enemies(game))
+	{
+		print_error("Failed to initialize enemies");
+		cleanup_game(game);
+		return (0);
+	}
 	if (!load_sprites(game))
 	{
 		print_error("Failed to load sprites");
