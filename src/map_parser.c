@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-#include <stdio.h>
 
 static int	parse_map_line(t_map *map, char *line, int y)
 {
 	int	x;
 
 	if (!line || ft_strlen(line) == 0)
+		return (0);
+	if (strncmp(line, "(null)", 6) == 0)
 		return (0);
 	if (map->width == 0)
 		map->width = ft_strlen(line);
@@ -60,7 +61,6 @@ static int	read_map_file(t_game *game, int fd)
 
 	y = 0;
 	line = get_next_line(fd);
-	printf("Line >> %s\n", line);
 	while (y < game->map.height && line != NULL)
 	{
 		if (!parse_map_line(&game->map, line, y))
@@ -75,9 +75,16 @@ static int	read_map_file(t_game *game, int fd)
 		game->map.grid[y] = line;
 		y++;
 		line = get_next_line(fd);
-		printf("Line >> %s\n", line);
 	}
-	printf("Line Count >> %d\n", y);
+	if (line != NULL)
+	{
+		free(line);
+		while (--y >= 0)
+			free(game->map.grid[y]);
+		free(game->map.grid);
+		game->map.grid = NULL;
+		return (0);
+	}
 	return (validate_parsed_map(game, y));
 }
 
