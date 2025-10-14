@@ -95,3 +95,15 @@ char	*ft_itoa(int n)
 	fill_number(str, n, len);
 	return (str);
 }
+
+size_t	ft_strlen(char	*str)
+{
+	size_t	count;
+
+	count = 0;
+	if (str == NULL)
+		return (0);
+	while (str[count] != '\0')
+		count++;
+	return (count);
+}

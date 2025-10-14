@@ -150,6 +150,7 @@ int		animation_loop(t_game *game);
 void	ft_putstr(char *str);
 void	ft_putnbr(int n);
 char	*ft_itoa(int n);
+size_t	ft_strlen(char	*str);
 void	flood_fill(char **grid, t_point start, t_point size);
 char	**copy_map(t_map *map);
 int		process_map_char(t_map *map, char c, int x, int y);
