@@ -1,0 +1,26 @@
+{
+   X11_writev_uninit
+   Memcheck:Param
+   writev(vector[0])
+   fun:writev
+   ...
+   fun:mlx_init
+}
+
+{
+   X11_xcb_writev_uninit
+   Memcheck:Param
+   writev(vector[0])
+   fun:writev
+   obj:*/libxcb.so.*
+   ...
+}
+
+{
+   X11_OpenDisplay_uninit
+   Memcheck:Param
+   writev(vector[0])
+   fun:writev
+   ...
+   fun:XOpenDisplay
+}
