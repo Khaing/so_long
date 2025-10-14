@@ -6,7 +6,7 @@
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 12:12:40 by kmar              #+#    #+#             */
-/*   Updated: 2025/10/14 14:16:53 by kmar             ###   ########.fr       */
+/*   Updated: 2025/10/14 20:49:11 by kmar             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ static int	is_valid_move(t_game *game, int new_x, int new_y)
 	if (game->map.grid[new_y][new_x] == MAP_WALL)
 		return (0);
 	return (1);
+}
+
+void	check_enemy(t_game *game)
+{
+	check_enemy_collision(game);
+	if (game->game_over)
+		ft_putstr(LOSE_MSG);
+	else
+		check_win_condition(game);
+	render_game(game);
 }
 
 void	move_player(t_game *game, int new_x, int new_y)
@@ -45,16 +55,6 @@ void	move_player(t_game *game, int new_x, int new_y)
 		ft_putstr("\n");
 	}
 	check_enemy(game);
-}
-
-void	check_enemy(t_game *game)
-{
-	check_enemy_collision(game);
-	if (game->game_over)
-		ft_putstr(LOSE_MSG);
-	else
-		check_win_condition(game);
-	render_game(game);
 }
 
 int	handle_keypress(int keycode, t_game *game)

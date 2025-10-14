@@ -6,7 +6,7 @@
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:40:55 by kmar              #+#    #+#             */
-/*   Updated: 2025/10/14 14:42:16 by kmar             ###   ########.fr       */
+/*   Updated: 2025/10/14 20:46:30 by kmar             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	init_enemy_data(t_game *game)
 	game->map.grid = NULL;
 }
 
-static void	init_game_data(t_game *game)
+void	init_game_data(t_game *game)
 {
 	int	i;
 
