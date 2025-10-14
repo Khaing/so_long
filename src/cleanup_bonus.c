@@ -31,6 +31,8 @@ static void	destroy_sprites(t_game *game)
 {
 	int	i;
 
+	if (!game->mlx)
+		return ;
 	if (game->sprites.wall)
 		mlx_destroy_image(game->mlx, game->sprites.wall);
 	if (game->sprites.empty)
