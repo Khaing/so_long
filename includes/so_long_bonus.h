@@ -139,6 +139,7 @@ typedef struct s_game
 int		parse_map(t_game *game, char *filename);
 int		validate_map(t_map *map);
 int		init_game(t_game *game, char *map_file);
+void	init_game_data(t_game *game);
 int		load_sprites(t_game *game);
 void	*create_exit_gate(void *mlx, int size);
 void	*create_coral(void *mlx, int size);
