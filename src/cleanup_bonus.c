@@ -66,4 +66,12 @@ void	cleanup_game(t_game *game)
 		free_map(game->map.grid);
 	if (game->enemies)
 		free(game->enemies);
+	if (game->mlx)
+	{
+#ifndef __APPLE__
+		mlx_destroy_display(game->mlx);
+#endif
+		free(game->mlx);
+		game->mlx = NULL;
+	}
 }
