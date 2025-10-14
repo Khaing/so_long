@@ -6,7 +6,7 @@
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 12:18:29 by kmar              #+#    #+#             */
-/*   Updated: 2025/10/07 12:19:56 by kmar             ###   ########.fr       */
+/*   Updated: 2025/10/14 16:28:45 by kmar             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 static int	parse_map_line(t_map *map, char *line, int y)
 {
 	int	x;
-	// if (strcmp(line, "(null)"))
-	// 	return (0);
+
 	if (!line || ft_strlen(line) == 0)
 		return (0);
 	if (map->width == 0)

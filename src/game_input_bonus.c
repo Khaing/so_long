@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_input_bonus.c                                     :+:      :+:    :+:   */
+/*   game_input_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 12:12:40 by kmar              #+#    #+#             */
-/*   Updated: 2025/10/07 12:13:31 by kmar             ###   ########.fr       */
+/*   Updated: 2025/10/14 14:16:53 by kmar             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	move_player(t_game *game, int new_x, int new_y)
 		ft_putnbr(game->map.collectibles);
 		ft_putstr("\n");
 	}
+	check_enemy(game);
+}
+
+void	check_enemy(t_game *game)
+{
 	check_enemy_collision(game);
 	if (game->game_over)
 		ft_putstr(LOSE_MSG);
