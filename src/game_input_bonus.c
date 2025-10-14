@@ -62,6 +62,8 @@ int	handle_keypress(int keycode, t_game *game)
 		handle_close(game);
 		return (0);
 	}
+	if (game->game_won || game->game_over)
+		return (0);
 	new_x = game->map.player.x;
 	new_y = game->map.player.y;
 	if (keycode == KEY_W || keycode == KEY_UP)

@@ -56,7 +56,7 @@ SRC_BONUS = $(SRCDIR)/main.c \
             $(SRCDIR)/game_window.c \
             $(SRCDIR)/game_render_bonus.c \
             $(SRCDIR)/game_input_bonus.c \
-            $(SRCDIR)/game_logic.c \
+            $(SRCDIR)/game_logic_bonus.c \
             $(SRCDIR)/sprite_loader_bonus.c \
             $(SRCDIR)/sprite_ocean.c \
             $(SRCDIR)/sprite_exit.c \
