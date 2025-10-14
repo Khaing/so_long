@@ -6,7 +6,7 @@
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 12:18:29 by kmar              #+#    #+#             */
-/*   Updated: 2025/10/14 16:28:45 by kmar             ###   ########.fr       */
+/*   Updated: 2025/10/14 17:43:11 by kmar             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ static int	validate_parsed_map(t_game *game, int y)
 	}
 	return (1);
 }
+
+static void	line_check(t_game *game, char *line, int *y)
+{
+	free(line);
+	while (--*y >= 0)
+		free(game->map.grid[*y]);
+	free(game->map.grid);
+	game->map.grid = NULL;
+}
+
 static int	read_map_file(t_game *game, int fd)
 {
 	int		y;
@@ -65,11 +75,7 @@ static int	read_map_file(t_game *game, int fd)
 	{
 		if (!parse_map_line(&game->map, line, y))
 		{
-			free(line);
-			while (--y >= 0)
-				free(game->map.grid[y]);
-			free(game->map.grid);
-			game->map.grid = NULL;
+			line_check(game, line, &y);
 			return (0);
 		}
 		game->map.grid[y] = line;
@@ -78,11 +84,7 @@ static int	read_map_file(t_game *game, int fd)
 	}
 	if (line != NULL)
 	{
-		free(line);
-		while (--y >= 0)
-			free(game->map.grid[y]);
-		free(game->map.grid);
-		game->map.grid = NULL;
+		line_check(game, line, &y);
 		return (0);
 	}
 	return (validate_parsed_map(game, y));

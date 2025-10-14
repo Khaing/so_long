@@ -30,15 +30,16 @@ SRC = $(SRCDIR)/main.c \
       $(SRCDIR)/map_validator.c \
       $(SRCDIR)/game_init.c \
       $(SRCDIR)/game_window.c \
-      $(SRCDIR)/game_render_norm.c \
+      $(SRCDIR)/game_render.c \
       $(SRCDIR)/game_input.c \
       $(SRCDIR)/game_logic.c \
-      $(SRCDIR)/sprite_loader_norm.c \
+      $(SRCDIR)/sprite_loader.c \
       $(SRCDIR)/sprite_ocean.c \
       $(SRCDIR)/sprite_exit.c \
       $(SRCDIR)/anim_dolphin.c \
       $(SRCDIR)/anim_fish.c \
-      $(SRCDIR)/string_utils.c \
+      $(SRCDIR)/string_utils1.c \
+	  $(SRCDIR)/string_utils2.c \
       $(SRCDIR)/animation.c \
       $(SRCDIR)/error_handler.c \
       $(SRCDIR)/cleanup.c \
@@ -66,7 +67,8 @@ SRC_BONUS = $(SRCDIR)/main.c \
             $(SRCDIR)/anim_fish.c \
             $(SRCDIR)/enemy_init_bonus.c \
             $(SRCDIR)/enemy_logic_bonus.c \
-            $(SRCDIR)/string_utils.c \
+            $(SRCDIR)/string_utils1.c \
+			$(SRCDIR)/string_utils2.c \
             $(SRCDIR)/animation_bonus.c \
             $(SRCDIR)/error_handler.c \
             $(SRCDIR)/cleanup_bonus.c \

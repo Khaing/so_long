@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_utils.c                                     :+:      :+:    :+:   */
+/*   string_utils1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmar <kmar@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 12:30:06 by kmar              #+#    #+#             */
-/*   Updated: 2025/10/07 12:30:14 by kmar             ###   ########.fr       */
+/*   Updated: 2025/10/14 17:35:08 by kmar             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,4 @@ char	*ft_itoa(int n)
 		return (NULL);
 	fill_number(str, n, len);
 	return (str);
-}
-
-size_t	ft_strlen(char	*str)
-{
-	size_t	count;
-
-	count = 0;
-	if (str == NULL)
-		return (0);
-	while (str[count] != '\0')
-		count++;
-	return (count);
 }
